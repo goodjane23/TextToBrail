@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "TextToBrail (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "TextToBrail (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
