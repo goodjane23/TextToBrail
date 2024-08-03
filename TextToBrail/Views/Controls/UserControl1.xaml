@@ -13,39 +13,44 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="CheckBox">
-                        <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
-                            <Ellipse x:Name="outerEllipse" UseLayoutRounding="False" >
-                                <Ellipse.Fill>
-                                    <SolidColorBrush Color="LightGray"/>
-                                </Ellipse.Fill>
-                            </Ellipse>
-                            <Ellipse Margin="15" x:Name="highlightCircle" UseLayoutRounding="False" >
-                                <Ellipse.Fill>
-                                    <SolidColorBrush Color="GreenYellow"/>
-                                </Ellipse.Fill>
-                            </Ellipse>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Border x:Name="Bullet"
+                                Width="20"
+                                Height="20"
+                                CornerRadius="10"
+                                Background="LightGray"
+                                VerticalAlignment="Center" />
+
+                            <ContentPresenter Grid.Column="1"
+                                          Content="{TemplateBinding Content}"
+                                          VerticalAlignment="Center" 
+                                          Margin="5,0,0,0"/>
                             <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CheckStates">
-                                    <VisualState x:Name="Cheked">
-                                        <VisualState.Setters>
-                                            <Setter Target="outerEllipse.Fill">
-                                                <Setter.Value>
-                                                    <SolidColorBrush Color="Red"/>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="UnCheked">
-                                        <VisualState.Setters>
-                                            <Setter Target="highlightCircle.Fill">
-                                                <Setter.Value>
-                                                    <SolidColorBrush Color="Green"/>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal" />
+                                        <VisualState x:Name="PointerOver" />
+                                        <VisualState x:Name="Pressed" />
+                                        <VisualState x:Name="Checked">
+                                            <Storyboard>
+                                                <ColorAnimation Storyboard.TargetName="Bullet" 
+                                                        Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                        To="Orange" Duration="0"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Unchecked">
+                                            <Storyboard>
+                                                <ColorAnimation Storyboard.TargetName="Bullet" 
+                                                        Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                        To="LightGray" Duration="0"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>                        
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -55,20 +60,20 @@
 
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="60"/>
-            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
-        <CheckBox Grid.Column="0" Grid.Row="0" x:Name="first" IsEnabled="True" IsChecked="True" Style="{StaticResource CircleCheckbox}" />
-        <CheckBox Grid.Column="0" Grid.Row="1" x:Name="second" IsEnabled="True" IsChecked="True" Style="{StaticResource CircleCheckbox}" />
-        <CheckBox Grid.Column="0" Grid.Row="2" x:Name="third" IsEnabled="True" IsChecked="True" Style="{StaticResource CircleCheckbox}" />
-        <CheckBox Grid.Column="1" Grid.Row="0" x:Name="fourth" IsEnabled="True" IsChecked="False" Style="{StaticResource CircleCheckbox}" />
-        <CheckBox Grid.Column="1" Grid.Row="1" x:Name="fifth" IsEnabled="True" IsChecked="False" Style="{StaticResource CircleCheckbox}" />
-        <CheckBox Grid.Column="1" Grid.Row="2" x:Name="sixth" IsEnabled="True" IsChecked="False" Style="{StaticResource CircleCheckbox}" />
+        <CheckBox Grid.Column="0" Grid.Row="0" x:Name="first" IsEnabled="False"  Style="{StaticResource CircleCheckbox}" />
+        <CheckBox Grid.Column="0" Grid.Row="1" x:Name="second" IsEnabled="False"  Style="{StaticResource CircleCheckbox}" />
+        <CheckBox Grid.Column="0" Grid.Row="2" x:Name="third" IsEnabled="False" Style="{StaticResource CircleCheckbox}" />
+        <CheckBox Grid.Column="1" Grid.Row="0" x:Name="fourth" IsEnabled="False"  Style="{StaticResource CircleCheckbox}" />
+        <CheckBox Grid.Column="1" Grid.Row="1" x:Name="fifth" IsEnabled="False"  Style="{StaticResource CircleCheckbox}" />
+        <CheckBox Grid.Column="1" Grid.Row="2" x:Name="sixth" IsEnabled="False"  Style="{StaticResource CircleCheckbox}" />
     </Grid>
 
 </UserControl>

@@ -111,11 +111,11 @@ public sealed partial class UserControl1 : UserControl
 
         if (e.NewValue is not short[] collection) return;
 
-        //labelControl.first.IsChecked = Convert.ToBoolean(collection[0]);
-        //labelControl.second.IsChecked = Convert.ToBoolean(collection[1]);
-        //labelControl.third.IsChecked = Convert.ToBoolean(collection[2]);
-        //labelControl.fourth.IsChecked = Convert.ToBoolean(collection[3]);
-        //labelControl.fifth.IsChecked = Convert.ToBoolean(collection[4]);
-        //labelControl.sixth.IsChecked = Convert.ToBoolean(collection[5]);
+        labelControl.first.IsChecked = Convert.ToBoolean(collection[0]);
+        labelControl.second.IsChecked = Convert.ToBoolean(collection[1]);
+        labelControl.third.IsChecked = Convert.ToBoolean(collection[2]);
+        labelControl.fourth.IsChecked = Convert.ToBoolean(collection[3]);
+        labelControl.fifth.IsChecked = Convert.ToBoolean(collection[4]);
+        labelControl.sixth.IsChecked = Convert.ToBoolean(collection[5]);
     }
 }
