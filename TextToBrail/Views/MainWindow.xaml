@@ -27,7 +27,20 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <GridView Grid.Column="0" ItemsSource="{x:Bind ViewModel.Letters, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}" x:Name="listdata" ScrollViewer.HorizontalScrollBarVisibility="Visible" >
+            <GridView Grid.Column="0" ItemsSource="{x:Bind ViewModel.Letters, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}" 
+                      x:Name="listdata"
+                      Height="250"
+                      ScrollViewer.HorizontalScrollBarVisibility="Visible" >
+
+                <GridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsWrapGrid 
+                            x:Name="MaxItemsWrapGrid"
+                            MaximumRowsOrColumns="4"
+                            Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </GridView.ItemsPanel>
+
                 <GridView.ItemTemplate>
                     <DataTemplate x:DataType="models:Letter">
                         <controls:UserControl1 Items="{x:Bind Dots}"/>

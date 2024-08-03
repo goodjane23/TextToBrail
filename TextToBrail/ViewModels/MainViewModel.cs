@@ -54,7 +54,7 @@ public partial class MainViewModel : ObservableObject
     {
         CreateTextWindow createTextWindow = new CreateTextWindow();
         createTextWindow.Activate();
-        
+        var t = TextHandler.NewText;
        
     }
 
