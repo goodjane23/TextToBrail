@@ -10,7 +10,8 @@
     mc:Ignorable="d"
     Title="TextToBrail">
 
-    <Grid>
+
+    <Grid>        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -21,14 +22,14 @@
                 <MenuFlyoutItem Text="Cоздать" Command="{x:Bind ViewModel.CreateNewFileCommand}"/>
             </MenuBarItem>
         </MenuBar>
-        
+
         <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <GridView Grid.Column="0" ItemsSource="{x:Bind ViewModel.Letters, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}" 
-                      x:Name="listdata" Height="250" ScrollViewer.HorizontalScrollBarVisibility="Auto" >
+            <GridView Grid.Column="0" ItemsSource="{x:Bind ViewModel.Letters, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                      x:Name="dotsList" Height="250" ScrollViewer.HorizontalScrollBarVisibility="Auto" SelectionChanged="GridView_SelectionChanged">
 
                 <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -43,9 +44,23 @@
                     </DataTemplate>
                 </GridView.ItemTemplate>
             </GridView>
-            
-            <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.CurrentText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="22" Foreground="SandyBrown"/>
+
+            <GridView 
+                x:Name="symbolList"
+                Grid.Column="1"
+                SelectionChanged="symbolList_SelectionChanged"
+                ItemsSource="{x:Bind ViewModel.Letters, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Height="250">
+                <GridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsWrapGrid Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </GridView.ItemsPanel>
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Letter">
+                        <TextBlock Text="{x:Bind Symbol, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="Wheat"/>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
         </Grid>
-        
     </Grid>
 </Window>

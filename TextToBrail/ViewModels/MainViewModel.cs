@@ -21,6 +21,9 @@ public partial class MainViewModel : ObservableObject
 
     #region Properties
 
+
+
+
     [ObservableProperty]
     private string currentText;
 

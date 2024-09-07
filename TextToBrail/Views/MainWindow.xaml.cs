@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TextToBrail.Models;
 using TextToBrail.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -31,4 +32,15 @@ public sealed partial class MainWindow : Window
         ViewModel = new MainViewModel();
     }
 
+    private void GridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (symbolList.SelectedIndex != dotsList.SelectedIndex)
+            symbolList.SelectedIndex = dotsList.SelectedIndex;
+    }
+
+    private void symbolList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (dotsList.SelectedIndex != symbolList.SelectedIndex) 
+            dotsList.SelectedIndex = symbolList.SelectedIndex;
+    }
 }

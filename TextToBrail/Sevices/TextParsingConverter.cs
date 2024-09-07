@@ -19,7 +19,7 @@ namespace TextToBrail.Sevices
                 foreach (var letter in text)
                 {
                     BrailDictionary.BrailLanguage.TryGetValue(letter, out var value);
-                    var l = new Letter(value);
+                    var l = new Letter(value, letter);
                     if (l.Dots is null)
                     {
                         var res = MessageBox.Show($"Символ {letter} не найден. продолжить?","Внимание", MessageBoxButton.YesNo);
