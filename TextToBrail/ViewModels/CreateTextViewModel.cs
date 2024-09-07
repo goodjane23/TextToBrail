@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using System;
 using TextToBrail.Models;
+using TextToBrail.Sevices;
 
 namespace TextToBrail.ViewModels;
 public partial class CreateTextViewModel : ObservableObject
@@ -14,7 +15,7 @@ public partial class CreateTextViewModel : ObservableObject
     [RelayCommand]
     private void SaveText(object obj)
     {
-        TextHandler.NewText = Text;
+        TextHandlerService.NewText = Text;
         CloseAction();
     }
 

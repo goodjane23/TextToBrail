@@ -1,14 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.UI.Windowing;
-using Microsoft.UI.Xaml.Controls;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
+using System.Windows;
 using TextToBrail.Models;
 using TextToBrail.Sevices;
 using Windows.Storage;
@@ -40,24 +35,22 @@ public partial class MainViewModel : ObservableObject
 
     public MainViewModel()
     {
+       
     }
 
     #endregion Ctor
 
-    #region Methods
-    #endregion Methods
-
     #region Commands
 
     [RelayCommand]
-    private async Task CreateNewFile()
+    private void CreateNewFile()
     {
-        CreateTextWindow createTextWindow = new CreateTextWindow();
+        CreateTextWindow createTextWindow = new();
         createTextWindow.Activate();
-        var t = TextHandler.NewText;
-       
+        _ = TextHandlerService.GetInstance();
+        TextHandlerService.Notify += TextUpdate;
     }
-
+    
     [RelayCommand]
     private async Task OpenFile()
     {
@@ -84,12 +77,29 @@ public partial class MainViewModel : ObservableObject
             CurrentText = fileContent;
             OnPropertyChanged(nameof(Letters));
         }
-        catch (Exception )
+        catch (Exception)
         {
             throw;
-        }     
-
+        }
     }
 
     #endregion Commands
+
+    #region Methods
+    private async void TextUpdate(string text)
+    {
+        CurrentText = text;
+        try
+        {
+            Letters = new ObservableCollection<Letter>(await TextParsingConverter.ConvertTextAsync(text));
+        }
+        catch (Exception)
+        {
+            MessageBox.Show("Символ не найден. Конвертация прервана");
+        }
+
+        OnPropertyChanged(nameof(Letters));
+    }
+
+    #endregion Methods
 }

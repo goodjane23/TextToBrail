@@ -28,16 +28,12 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <GridView Grid.Column="0" ItemsSource="{x:Bind ViewModel.Letters, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}" 
-                      x:Name="listdata"
-                      Height="250"
-                      ScrollViewer.HorizontalScrollBarVisibility="Visible" >
+                      x:Name="listdata" Height="250" ScrollViewer.HorizontalScrollBarVisibility="Auto" >
 
                 <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <ItemsWrapGrid 
-                            x:Name="MaxItemsWrapGrid"
-                            MaximumRowsOrColumns="4"
-                            Orientation="Horizontal"/>
+                            x:Name="MaxItemsWrapGrid" MaximumRowsOrColumns="4" Orientation="Horizontal"/>
                     </ItemsPanelTemplate>
                 </GridView.ItemsPanel>
 
